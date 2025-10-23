@@ -1,0 +1,268 @@
+/* =========================================================
+   🌈 ตัวแปรโทนสี / เงา / รัศมี
+   ========================================================= */
+:root {
+  --bg:#FAFAFC; 
+  --card:#fff; 
+  --ink:#1b1b1f; 
+  --muted:#6b6b6f; 
+  --line:#ececf0;
+  --brand:#ff6f59; 
+  --accent:#ff8fab; 
+  --radius:14px; 
+  --shadow:0 6px 22px rgba(0,0,0,.06);
+}
+
+/* =========================================================
+   ⚙️ ค่าพื้นฐานหน้า
+   ========================================================= */
+* { box-sizing:border-box; }
+body {
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:16px/1.65 "Inter","Prompt",system-ui,-apple-system,sans-serif;
+}
+a { color:inherit; text-decoration:none; }
+.wrap { max-width:1200px; margin:auto; padding:0 16px; }
+
+/* =========================================================
+   🔝 ส่วนบนสุด (Top Bar)
+   ========================================================= */
+.topbar {
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:saturate(180%) blur(12px);
+  border-bottom:1px solid var(--line);
+}
+.row {
+  display:grid;
+  grid-template-columns:160px 1fr auto;
+  gap:14px;
+  align-items:center;
+  padding:10px 0;
+}
+.logo {
+  font-weight:900;
+  color:var(--brand);
+  letter-spacing:.4px;
+}
+
+/* กล่องค้นหา */
+.search {
+  display:flex;
+  border:1px solid var(--line);
+  border-radius:999px;
+  background:#fff;
+  overflow:hidden;
+}
+.search input {
+  flex:1;
+  border:0;
+  padding:10px 14px;
+  outline:0;
+  background:transparent;
+}
+.search button {
+  border:0;
+  background:var(--brand);
+  color:#fff;
+  padding:10px 16px;
+  cursor:pointer;
+}
+.right a { margin-left:12px; }
+
+/* =========================================================
+   🧭 Toolbar (ตัวกรองและจำนวนผลลัพธ์)
+   ========================================================= */
+.toolbar {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:10px 0 14px;
+}
+.filters {
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+.group {
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.group label {
+  color:var(--muted);
+  font-size:14px;
+}
+.group select,
+.group input {
+  border:1px solid var(--line);
+  border-radius:10px;
+  padding:8px 10px;
+  background:#fff;
+}
+.group.price span { opacity:.5; }
+.group.price button {
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:10px;
+  padding:8px 12px;
+  cursor:pointer;
+}
+.resultCount { color:var(--muted); }
+
+/* =========================================================
+   🛒 Catalog Grid
+   ========================================================= */
+.grid {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:14px;
+  margin:10px 0 20px;
+}
+
+/* กล่องสินค้าแต่ละใบ */
+.card {
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:16px;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  transition:transform .15s ease;
+}
+.card:hover {
+  transform:translateY(-2px);
+}
+
+/* =========================================================
+   🖼️ รูปภาพสินค้า (ไม่ล้น ไม่ถูกตัด)
+   ========================================================= */
+.card .thumb {
+  width:100%;
+  height:240px;                   /* ความสูงของกรอบภาพ */
+  border-radius:16px;
+  background:#f6f6f6;             /* พื้นหลังเทาอ่อน */
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+/* ✅ รูปภาพจะไม่ถูกตัด ย่อพอดีกรอบ */
+.card .thumb img {
+  width:100%;
+  height:100%;
+  object-fit:contain;             /* ❗ ป้องกันภาพล้น/ถูกครอบ */
+  object-position:center;
+  display:block;
+  transition:transform .25s ease;
+}
+.card .thumb:hover img {
+  transform:scale(1.02);
+}
+
+/* ป้ายเล็กๆ บนมุมรูป */
+.badges {
+  position:absolute;
+  left:8px;
+  top:8px;
+  display:flex;
+  gap:6px;
+}
+.badge {
+  background:#fff3f0;
+  color:#c33;
+  border:1px solid #ffd7cd;
+  border-radius:8px;
+  padding:2px 6px;
+  font-size:12px;
+}
+.extra { background:#ffefe8; color:#d14; }
+
+/* =========================================================
+   🧾 เนื้อหาในกล่องสินค้า
+   ========================================================= */
+.body { padding:10px 12px; }
+.title {
+  font-weight:700;
+  margin:0 0 4px;
+  font-size:15px;
+}
+.meta {
+  font-size:12px;
+  color:var(--muted);
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+.price {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:6px;
+}
+.price strong { font-size:18px; }
+.price del { color:#9aa; }
+
+/* ปุ่มเข้าหน้ารายละเอียด */
+.card .go {
+  margin:10px 12px 12px auto;
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:10px;
+  padding:8px 10px;
+  cursor:pointer;
+  font-size:14px;
+}
+
+/* =========================================================
+   🔢 Pagination
+   ========================================================= */
+.pager {
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin:20px 0 40px;
+}
+.pager button {
+  border:1px solid var(--line);
+  background:#fff;
+  border-radius:10px;
+  padding:8px 12px;
+  cursor:pointer;
+}
+.pager .active {
+  background:var(--brand);
+  color:#fff;
+  border-color:transparent;
+}
+.pager .disabled {
+  opacity:.45;
+  pointer-events:none;
+}
+
+/* =========================================================
+   📱 Responsive (จอเล็ก)
+   ========================================================= */
+@media (max-width:1180px){
+  .grid { grid-template-columns:repeat(4,1fr); }
+}
+@media (max-width:900px){
+  .row { grid-template-columns:1fr; gap:10px; }
+  .logo { order:-1; }
+  .grid { grid-template-columns:repeat(3,1fr); }
+  .card .thumb { height:200px; }
+}
+@media (max-width:620px){
+  .grid { grid-template-columns:repeat(2,1fr); }
+  .toolbar { flex-direction:column; align-items:flex-start; gap:8px; }
+  .card .thumb { height:180px; }
+}
+@media (min-width:1400px){
+  .card .thumb { height:260px; }
+}

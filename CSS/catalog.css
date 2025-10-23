@@ -1,0 +1,270 @@
+/* =========================
+   Catalog — Gyver Home (5 cards per row)
+   ========================= */
+
+:root{
+  --wrap: 1300px;
+  --card-gap: 14px;
+  --radius: 14px;
+  --shadow: 0 3px 10px rgba(0,0,0,.06);
+  --red: #e11d48;
+  --red-weak: #ffe4ea;
+  --text: #111827;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+}
+
+* { box-sizing: border-box; }
+html,body{
+  margin:0;
+  color:var(--text);
+  font-family: "Inter","Noto Sans Thai",sans-serif;
+  background:#fff;
+}
+
+.wrap{
+  max-width:var(--wrap);
+  margin:0 auto;
+  padding:0 16px;
+}
+
+.topbar{
+  position:sticky;
+  top:0;
+  z-index:10;
+  background:#fff;
+  border-bottom:1px solid var(--line);
+}
+
+.topbar .wrap.row{
+  display:flex;
+  gap:16px;
+  align-items:center;
+  justify-content:space-between;
+  padding:14px 16px;
+}
+
+.logo{
+  font-weight:800;
+  letter-spacing:.6px;
+  color:#ef4444;
+  text-decoration:none;
+}
+
+.search{
+  flex: 1 1 auto;
+  max-width:520px;
+  display:flex;
+  gap:8px;
+}
+.search input{
+  flex:1 1 auto;
+  padding:8px 12px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  font-size:14px;
+}
+.search button{
+  padding:8px 14px;
+  border:0;
+  border-radius:8px;
+  background:#ffedd5;
+  color:#c2410c;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.topbar .right{
+  display:flex;
+  gap:14px;
+}
+.topbar .right a{
+  text-decoration:none;
+  color:#111827;
+}
+.topbar .right .cart{
+  font-weight:700;
+}
+
+/* toolbar */
+.toolbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:12px 16px;
+  flex-wrap:wrap;
+}
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 14px;
+  align-items:center;
+}
+.group{
+  display:flex;
+  align-items:center;
+  gap:6px;
+}
+.group.price input{
+  width:100px;
+}
+.group select,
+.group input{
+  padding:6px 8px;
+  border:1px solid var(--line);
+  border-radius:8px;
+  background:#fff;
+  font-size:13px;
+}
+.group button{
+  padding:6px 12px;
+  border:0;
+  border-radius:8px;
+  background:#f3f4f6;
+  cursor:pointer;
+  font-size:13px;
+}
+.resultCount{
+  color:var(--muted);
+  font-size:13px;
+}
+
+/* grid layout */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--card-gap);
+  margin: 18px 0 40px;
+}
+
+@media (max-width: 1200px){
+  .grid{ grid-template-columns: repeat(4, 1fr); }
+}
+@media (max-width: 980px){
+  .grid{ grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 720px){
+  .grid{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 480px){
+  .grid{ grid-template-columns: 1fr; }
+}
+
+/* card */
+.card{
+  overflow:hidden;
+  border-radius: var(--radius);
+  border:1px solid var(--line);
+  background:#fff;
+  box-shadow: var(--shadow);
+  padding: 8px 8px 12px;
+  transition: transform .2s ease;
+}
+.card:hover{
+  transform:translateY(-3px);
+}
+
+.card .thumb{
+  display:block;
+  overflow:hidden;
+  border-radius: 10px;
+  background:#f8fafc;
+}
+.card .thumb img{
+  display:block;
+  width:100%;
+  height:100%;      /* ลดความสูงลง */
+  object-fit:contain; /* เปลี่ยนจาก cover → contain ให้เห็นภาพเต็ม */
+  background:#fff;    /* พื้นหลังขาวเวลาอัตราส่วนไม่พอดี */
+  transition: transform .35s ease;
+}
+
+.card:hover .thumb img{
+  transform: scale(1.03);
+}
+
+.card .title{
+  display:-webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow:hidden;
+  text-decoration:none;
+  color:var(--text);
+  font-weight:700;
+  line-height:1.35;
+  font-size:13.5px;
+  margin:8px 2px 4px;
+}
+
+.card .meta{
+  color:var(--muted);
+  font-size:12.5px;
+  margin:3px 2px 0;
+  display:flex;
+  align-items:center;
+  gap:5px;
+}
+.card .meta .star{ color:#f59e0b; }
+.card .meta .dot{ opacity:.6; }
+
+/* price line */
+.price-line{
+  display:flex;
+  align-items:baseline;
+  gap:6px;
+  margin:8px 2px 0;
+}
+.price-line .cur{
+  font-size:15px;
+  font-weight:800;
+  color:var(--red);
+  letter-spacing:.2px;
+}
+.price-line .old{
+  font-size:12px;
+  color:#9ca3af;
+  text-decoration:line-through;
+}
+.price-line .off{
+  margin-left:auto;
+  font-size:11px;
+  font-weight:700;
+  background:var(--red-weak);
+  color:var(--red);
+  padding:2px 6px;
+  border-radius:999px;
+  line-height:1.4;
+}
+
+/* empty state */
+.empty{
+  padding:40px 0 60px;
+  text-align:center;
+  color:var(--muted);
+}
+
+/* pager */
+.pager{
+  display:flex;
+  gap:6px;
+  justify-content:center;
+  padding:10px 0 40px;
+}
+.pager .pg{
+  border:1px solid var(--line);
+  background:#fff;
+  padding:6px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  font-size:13px;
+}
+.pager .pg.active{
+  background:#111827;
+  color:#fff;
+  border-color:#111827;
+}
+.pager .pg:disabled{
+  opacity:.4;
+  cursor:not-allowed;
+}

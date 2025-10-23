@@ -1,0 +1,78 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Catalog — Gyver Home</title>
+  <link rel="stylesheet" href="CSS/index.css">
+  <link rel="stylesheet" href="CSS/catalog.css">
+  
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap row">
+    <a href="index.html" class="logo">S GYVER</a>
+    <form class="search" id="searchForm">
+      <input id="q" type="search" placeholder="ค้นหาสินค้า เช่น ชั้นวาง ไม้สน แจกัน">
+      <button type="submit">ค้นหา</button>
+    </form>
+    <nav class="right">
+      <a href="product.html?id=S001">ตัวอย่างสินค้า</a>
+      <a href="#" class="cart">ตะกร้า (0)</a>
+    </nav>
+  </div>
+
+  <!-- toolbar -->
+  <div class="wrap toolbar">
+    <div class="filters">
+      <div class="group">
+        <label>เรียงโดย</label>
+        <select id="sort">
+          <option value="popular">ยอดนิยม</option>
+          <option value="latest">ล่าสุด</option>
+          <option value="bestseller">สินค้าขายดี</option>
+          <option value="price-asc">ราคา: ต่ำ→สูง</option>
+          <option value="price-desc">ราคา: สูง→ต่ำ</option>
+        </select>
+      </div>
+
+      <div class="group">
+        <label>หมวด</label>
+        <select id="category">
+          <option value="">ทั้งหมด</option>
+          <option value="ชั้นวาง">ชั้นวาง</option>
+          <option value="หิ้งพระ">หิ้งพระ</option>
+          <option value="ชั้นแขวน">ชั้นแขวน</option>
+          <option value="ของตกแต่ง">ของตกแต่ง</option>
+        </select>
+      </div>
+
+      <div class="group price">
+        <label>ราคา</label>
+        <input id="pmin" type="number" min="0" placeholder="ต่ำสุด">
+        <span>–</span>
+        <input id="pmax" type="number" min="0" placeholder="สูงสุด">
+        <button id="applyPrice" type="button">ตกลง</button>
+      </div>
+    </div>
+
+    <div class="resultCount"><span id="count">0</span> รายการ</div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section id="grid" class="grid" aria-live="polite"></section>
+
+  <!-- pagination -->
+  <nav class="pager" id="pager"></nav>
+</main>
+
+<footer class="footer">
+  <div class="wrap">© 2025 Gyver Home</div>
+</footer>
+
+<script src="JS/catalog.js"></script>
+</body>
+</html>

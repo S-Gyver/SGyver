@@ -1,0 +1,508 @@
+:root {
+	/* เมธอด: ตัวแปรธีมรวม ใช้ตั้งค่าสี เงา และรัศมีมุม เพื่อเปลี่ยนโทนทั้งเว็บจากจุดเดียว */
+	--bg: #FAFAFC;
+	--card: #fff;
+	--ink: #1b1b1f;
+	--muted: #6b6b6f;
+	--brand: #ff6f59;
+	--brand-2: #7cc5b3;
+	--line: #ececf0;
+	--chip: #f3f4f8;
+	--chip-ink: #334;
+	--radius: 14px;
+	--shadow: 0 6px 24px rgba(0,0,0,.06);
+}
+
+* {
+	/* เมธอด: ทำให้การคำนวณขนาดรวมขอบ/แพดดิ้ง คุมเลย์เอาต์ง่ายขึ้น */
+	box-sizing: border-box
+}
+
+body {
+	/* เมธอด: กำหนดฟอนต์ พื้นหลัง และสีตัวอักษรหลักของทั้งหน้า */
+	margin: 0;
+	font: 16px/1.6 "Inter","Prompt",system-ui,-apple-system,sans-serif;
+	background: var(--bg);
+	color: var(--ink)
+}
+
+a {
+	/* เมธอด: ลิงก์ใช้สีตัวอักษรปัจจุบันและตัดเส้นใต้ เพื่อให้กลมกลืนกับดีไซน์ */
+	color: inherit;
+	text-decoration: none
+}
+
+.wrap {
+	/* เมธอด: คอนเทนเนอร์กึ่งกลางหน้ากว้างจำกัด + ระยะขอบด้านข้าง */
+	max-width: 1200px;
+	margin: auto;
+	padding: 0 16px
+}
+
+/* ====================== Header ====================== */
+.header {
+	/* เมธอด: ทำแถบหัวติดบนสุดแบบโปร่งเบลอ และมีเส้นคั่นด้านล่าง */
+	position: sticky;
+	top: 0;
+	z-index: 40;
+	background: rgba(255,255,255,.8);
+	backdrop-filter: saturate(180%) blur(14px);
+	border-bottom: 1px solid var(--line)
+}
+
+.header-in {
+	/* เมธอด: จัดกริดหัวเว็บ 3 คอลัมน์ = โลโก้ | ค้นหา | ลิงก์ด่วน */
+	display: grid;
+	grid-template-columns: 160px 1fr auto; /* โลโก้ | ค้นหา | ลิงก์ด่วน */
+	grid-auto-rows: auto;
+	gap: 14px;
+	align-items: center;
+	padding: 8px 0 6px;
+}
+
+.logo {
+	/* เมธอด: โลโก้แบรนด์ให้เด่นด้วยน้ำหนักหนาและสีแบรนด์ */
+	font-weight: 800;
+	letter-spacing: .4px;
+	color: var(--brand);
+	font-size: 22px
+}
+
+/* ====================== Search ====================== */
+.search {
+	/* เมธอด: กล่องค้นหาแบบปุ่มโค้ง แยกอินพุตและปุ่มส่ง */
+	display: flex;
+	align-items: center;
+	border: 1px solid var(--line);
+	border-radius: 999px;
+	background: #fff;
+	/* overflow: hidden;  เมธอด: ถ้าอยากให้ขอบมนครอบทุกอย่าง เปิดบรรทัดนี้ */
+	margin-bottom: 0px;
+}
+
+.search input {
+	/* เมธอด: อินพุตยืดเต็มที่ พื้นหลังใส ขอบโปร่ง */
+	flex: 1;
+	border: 0;
+	padding: 12px 14px;
+	outline: 0;
+	font-size: 15px;
+	background: transparent
+}
+
+.search button {
+	/* เมธอด: ปุ่มค้นหาพื้นหลังสีแบรนด์ มุมขวากลม */
+	border: 0;
+	background: var(--brand);
+	color: #fff;
+	padding: 10px 16px;
+	cursor: pointer;
+	border-top-right-radius: 999px; /* มุมขวาบนโค้ง */
+	border-bottom-right-radius: 999px; /* มุมขวาล่างโค้ง */
+}
+
+.quick a {
+	/* เมธอด: ลิงก์ด่วนด้านขวาเว้นระยะซ้ายเล็กน้อย */
+	margin-left: 10px;
+	color: #333
+}
+
+.quick .cart {
+	/* เมธอด: ป้ายตะกร้าให้ดูเป็นชิป */
+	background: var(--chip);
+	padding: 8px 12px;
+	border-radius: 10px
+}
+
+/* --- Hot search (คำฮิต + แสดงสูงสุด 5 คำ) --- */
+.hot-search {
+	/* เมธอด: แถบคำค้นหายอดนิยมใต้ช่องค้นหา */
+	padding: 0px 0 0
+}
+
+.hot-inline {
+	/* เมธอด: วางบรรทัดคำฮิตไว้คอลัมน์ที่ 2 แถวที่ 2 ของส่วนหัว */
+	grid-column: 2;
+	grid-row: 2;
+	align-self: start;
+	margin-top: -15px;
+}
+
+.hot-search .label {
+	/* เมธอด: ป้ายกำกับ “คำฮิต” ตัวเล็ก สีจาง */
+	font-size: 12px;
+	color: var(--muted);
+	margin-right: 6px
+}
+
+.hot-search .chips {
+	/* เมธอด: กลุ่มปุ่มชิปแบบห่อบรรทัดอัตโนมัติ */
+	display: inline-flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	vertical-align: middle
+}
+
+.chip {
+	/* เมธอด: ปุ่มชิปแบบโค้ง คลิกได้ มีเส้นขอบอ่อน */
+	background: var(--chip);
+	color: var(--chip-ink);
+	border-radius: 999px;
+	padding: 4px 8px;
+	font-size: 12px;
+	cursor: pointer;
+	border: 1px solid var(--line)
+}
+
+.chip:hover {
+	/* เมธอด: ไฮไลต์ชิปเมื่อโฮเวอร์ด้วยเส้นขอบชัดขึ้น */
+	outline: 2px solid #e8e9ef
+}
+
+/* ====================== เมนูหลัก (chips) ====================== */
+.menu {
+	/* เมธอด: เมนูแนวนอนแบบชิป มีเส้นคั่นด้านล่าง */
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	padding: 10px 0 12px;
+	border-bottom: 1px solid var(--line)
+}
+
+.menu a {
+	/* เมธอด: สไตล์ปุ่มเมนูหลัก ให้ตัวหนาเล็กน้อย */
+	background: var(--chip);
+	color: var(--chip-ink);
+	padding: 8px 12px;
+	border-radius: 999px;
+	font-weight: 600;
+	font-size: 14px
+}
+
+.menu a:hover {
+	/* เมธอด: เพิ่มกรอบเมื่อโฮเวอร์ */
+	outline: 2px solid #e8e9ef
+}
+
+/* ====================== Hero Swiper ====================== */
+.hero-slider {
+	/* เมธอด: กล่องสไลด์ฮีโร่ ขอบมน มีเงา */
+	margin: 18px 0;
+	border-radius: 24px;
+	overflow: hidden;
+	box-shadow: var(--shadow)
+}
+
+.hero-slider .swiper-slide {
+	/* เมธอด: จัดให้สไลด์แต่ละภาพกลางกล่อง และมีความสูงขั้นต่ำ */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 320px;
+	background: #f6fbff
+}
+
+.hero-content {
+	/* เมธอด: กล่องข้อความลอยบนสไลด์ พื้นหลังโปร่งเล็กน้อย */
+	position: absolute;
+	left: 40px;
+	top: 40px;
+	max-width: 520px;
+	background: rgba(255,255,255,.85);
+	padding: 16px 18px;
+	border-radius: 14px
+}
+
+.hero-content h1 {
+	/* เมธอด: หัวข้อใหญ่ในฮีโร่ */
+	margin: 0 0 6px;
+	font-size: 28px
+}
+
+.hero-content p {
+	/* เมธอด: คำอธิบายย่อยในฮีโร่ */
+	margin: 0 0 10px;
+	color: var(--muted)
+}
+
+.btn {
+	/* เมธอด: ปุ่มพื้นฐานแบบโค้ง เน้นตัวหนา */
+	border: 0;
+	border-radius: 999px;
+	padding: 12px 18px;
+	cursor: pointer;
+	font-weight: 700
+}
+
+.btn.primary {
+	/* เมธอด: ปุ่มหลักสีแบรนด์ */
+	background: var(--brand);
+	color: #fff
+}
+
+.btn.ghost {
+	/* เมธอด: ปุ่มรองพื้นสีขาว มีเส้นขอบ */
+	background: #fff;
+	color: #333;
+	border: 1px solid var(--line)
+}
+
+.swiper-button-prev, .swiper-button-next {
+	/* เมธอด: สีปุ่มนำทางของสไลด์ */
+	color: #333
+}
+
+.swiper-pagination-bullet {
+	/* เมธอด: จุดบอกหน้าในเพจิเนชัน (สีเทา) */
+	background: #ccc;
+	opacity: 1
+}
+
+.swiper-pagination-bullet-active {
+	/* เมธอด: จุดที่กำลังแอคทีฟ (สีเข้มกว่า) */
+	background: #333
+}
+
+/* ====================== หัวข้อแต่ละส่วน (Section) ====================== */
+.section {
+	/* เมธอด: บรรทัดหัวข้อส่วนต่าง ๆ พร้อมลิงก์ “ดูทั้งหมด” */
+	margin: 28px 0 12px;
+	display: flex;
+	justify-content: space-between;
+	align-items: end
+}
+
+.section h2 {
+	/* เมธอด: ขนาดตัวอักษรหัวข้อ */
+	margin: 0;
+	font-size: 22px
+}
+
+.section a {
+	/* เมธอด: ลิงก์เสริมใต้หัวข้อ (สีจาง) */
+	font-size: 14px;
+	color: var(--muted)
+}
+
+/* ====================== ตะแกรงสินค้า (Product grid) ====================== */
+.grid {
+	/* เมธอด: กริด 4 คอลัมน์ ระยะห่าง 16px */
+	display: grid;
+	grid-template-columns: repeat(4,1fr);
+	gap: 16px
+}
+
+.card {
+	/* เมธอด: บัตรสินค้า พื้นหลังขาว ขอบอ่อน มุมโค้ง */
+	background: var(--card);
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column
+}
+
+.card .thumb {
+	/* เมธอด: พื้นที่รูปสินค้าเป็นสี่เหลี่ยมจัตุรัส */
+	aspect-ratio: 1/1;
+	background: #eee
+}
+
+.card .thumb > .ph {
+	/* เมธอด: รูปตัวอย่าง/โครงสูงเต็มพื้นที่ */
+	height: 100%;
+	border-radius: 0
+}
+
+.card .body {
+	/* เมธอด: ช่องรายละเอียดสินค้า */
+	padding: 12px
+}
+
+.name {
+	/* เมธอด: ชื่อสินค้า */
+	font-size: 15px;
+	margin: 0 0 4px
+}
+
+.meta {
+	/* เมธอด: เมตาดาต้าสินค้า (เช่น สี/ขนาด) สีจาง */
+	font-size: 12px;
+	color: var(--muted)
+}
+
+.price {
+	/* เมธอด: แถวราคาสินค้า มีระยะห่างเล็กน้อย */
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: 8px
+}
+
+.price strong {
+	/* เมธอด: ราคาปัจจุบันให้เด่น */
+	font-size: 18px
+}
+
+.price del {
+	/* เมธอด: ราคาเดิมเป็นสีเทาอ่อน */
+	color: #9aa
+}
+
+.badge {
+	/* เมธอด: ป้ายโปร/ส่วนลดเล็ก ๆ */
+	background: #ff8fab;
+	color: #fff;
+	font-size: 12px;
+	border-radius: 8px;
+	padding: 2px 6px
+}
+
+.add {
+	/* เมธอด: ปุ่มเพิ่มลงตะกร้าในบัตรสินค้า */
+	margin: 12px;
+	margin-top: auto;
+	background: #fff;
+	border: 1px solid var(--line);
+	border-radius: 10px;
+	padding: 10px;
+	cursor: pointer
+}
+
+.add:hover {
+	/* เมธอด: เน้นขอบเมื่อโฮเวอร์ */
+	border-color: #d7d8de
+}
+
+/* ====================== แถบ Made to order ====================== */
+.mto {
+	/* เมธอด: แถบข้อความ/ปุ่ม CTA แบบกริด 2 คอลัมน์ */
+	margin: 28px 0;
+	background: #fff;
+	border: 1px dashed #ffd3e1;
+	border-radius: 18px;
+	padding: 18px;
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 14px;
+	align-items: center
+}
+
+.mto p {
+	/* เมธอด: ข้อความประกอบ MTO */
+	margin: 0;
+	color: #444
+}
+
+.mto .btn {
+	/* เมธอด: ปุ่ม CTA สีรอง (brand-2) */
+	background: var(--brand-2);
+	color: #113
+}
+
+/* ====================== จดหมายข่าว & ฟุตเตอร์ ====================== */
+.news {
+	/* เมธอด: กล่องสมัครข่าวสาร จัดวางสองฝั่ง */
+	margin: 34px 0;
+	background: #fff;
+	border: 1px solid var(--line);
+	border-radius: 18px;
+	padding: 20px;
+	display: flex;
+	gap: 14px;
+	align-items: center;
+	justify-content: space-between
+}
+
+.news form {
+	/* เมธอด: ฟอร์มแนวนอน อินพุต+ปุ่ม */
+	display: flex;
+	gap: 8px
+}
+
+.news input {
+	/* เมธอด: อินพุตอีเมลมีขอบอ่อนและมุมโค้ง */
+	border: 1px solid var(--line);
+	border-radius: 10px;
+	padding: 10px 12px;
+	min-width: 260px
+}
+
+footer {
+	/* เมธอด: ส่วนท้ายมีเส้นคั่นด้านบนและระยะห่างแนวตั้ง */
+	padding: 28px 0;
+	color: #666;
+	border-top: 1px solid var(--line)
+}
+
+/* ====================== Toast ====================== */
+.toast {
+	/* เมธอด: ข้อความแจ้งเตือนลอยด้านล่างกลางจอ ซ่อนโดยค่าเริ่มต้น */
+	position: fixed;
+	left: 50%;
+	bottom: 28px;
+	transform: translateX(-50%) translateY(16px);
+	background: #111;
+	color: #fff;
+	padding: 10px 14px;
+	border-radius: 10px;
+	opacity: 0;
+	pointer-events: none;
+	transition: .25s;
+	z-index: 50
+}
+
+.toast.show {
+	/* เมธอด: แสดง Toast โดยค่อย ๆ เลื่อนและเฟดอิน */
+	opacity: 1;
+	transform: translateX(-50%) translateY(0)
+}
+
+/* ====================== Responsive ====================== */
+@media (max-width:1024px) {
+	/* เมธอด: ปรับกริดสินค้าเหลือ 3 คอลัมน์บนหน้าจอกว้างปานกลาง */
+	.grid {
+		grid-template-columns: repeat(3,1fr)
+	}
+}
+
+@media (max-width:680px) {
+	/* เมธอด: ปรับเลย์เอาต์เฮดเดอร์และคอมโพเนนต์ต่าง ๆ สำหรับมือถือ */
+	.header-in {
+		display: grid;
+		grid-template-columns: 160px 1fr auto;
+		grid-auto-rows: auto;
+		align-items: center;
+		padding: 12px 0 6px;
+		column-gap: 14px; /* ช่องไฟแนวนอนระหว่างคอลัมน์ */
+		row-gap: 0px;     /* ช่องไฟแนวตั้งระหว่างแถว (ปรับเพิ่มได้) */
+	}
+
+	.logo {
+		/* เมธอด: ซ่อนโลโก้เพื่อลดความหนาแน่นบนจอเล็ก */
+		display: none
+	}
+
+	.hot-inline {
+		/* เมธอด: ให้บรรทัดคำฮิตกินความกว้างเต็มแถว */
+		grid-column: 1 / -1
+	}
+
+	.grid {
+		/* เมธอด: สินค้าเหลือ 2 คอลัมน์บนจอเล็ก */
+		grid-template-columns: repeat(2,1fr)
+	}
+
+	.news {
+		/* เมธอด: ฟอร์มข่าวสารเรียงลงแนวตั้งบนมือถือ */
+		flex-direction: column;
+		align-items: start
+	}
+
+	.hero-content {
+		/* เมธอด: ขยับกล่องข้อความฮีโร่ให้ชิดขอบน้อยลงบนจอเล็ก */
+		left: 16px;
+		right: 16px;
+		top: 16px
+	}
+}

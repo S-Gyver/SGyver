@@ -1,143 +1,221 @@
 ﻿<!DOCTYPE html>
 <html lang="th">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Gyver Home — Pinkoi-style</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gyver Home — Pinkoi-style</title>
 
-    <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- เมธอด: โหลดสไตล์ของ Swiper จาก CDN เพื่อใช้ทำสไลด์ Hero -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
-    <!-- App CSS -->
-    <link rel="stylesheet" href="styles.css">
+  <!-- เมธอด: สไตล์หลักของแอป แยกเป็นไฟล์เพื่อแคชและดูแลง่าย -->
+  <link rel="stylesheet" href="CSS/index.css">
 </head>
+
 <body>
+  <!-- ====================== Header ====================== -->
+  <header class="header">
+    <div class="wrap header-in">
+      <!-- เมธอด: โลโก้/ลิงก์กลับหน้าแรก -->
+      <a href="#" class="logo">S GYVER</a>
 
-    <header class="header">
-        <div class="wrap header-in">
-            <a href="#" class="logo">S GYVER</a>
+      <!-- เมธอด: ฟอร์มค้นหา — onsubmit กันรีเฟรชหน้า (เดโม) ให้ JS ไปจัดการแทน -->
+      <form class="search" onsubmit="event.preventDefault();">
+        <input type="search" placeholder="ค้นหาสินค้า/สไตล์ เช่น โคมไฟสแกนดิเนเวีย" aria-label="ค้นหาสินค้า">
+        <button type="submit" aria-label="ปุ่มค้นหา">ค้นหา</button>
+      </form>
 
-            <!-- ช่องค้นหา -->
-            <form class="search" onsubmit="event.preventDefault();">
-                <input type="search" placeholder="ค้นหาสินค้า/สไตล์ เช่น โคมไฟสแกนดิเนเวีย">
-                <button type="submit">ค้นหา</button>
-            </form>
-            <div class="hot-search hot-inline"> <span class="chips" id="hotChips"></span> </div>
+      <!-- เมธอด: แถบคำค้นหายอดนิยม/ประวัติ (เรนเดอร์ชิปด้วย JS ลง #hotChips) -->
+      <div class="hot-search hot-inline">
+        <span class="chips" id="hotChips"></span>
+      </div>
 
-            <!-- ลิงก์ขวา -->
-            <nav class="quick">
-                <a href="#">เข้าสู่ระบบ</a>
-                <a href="#">รายการโปรด</a>
-                <a href="#" class="cart">ตะกร้า (0)</a>
-            </nav>
+      <!-- เมธอด: ลิงก์ลัดมุมขวา (บัญชี, รายการโปรด, ตะกร้า) -->
+      <nav class="quick" aria-label="เมนูลัด">
+        <a href="#">เข้าสู่ระบบ</a>
+        <a href="#">รายการโปรด</a>
+        <a href="#" class="cart" aria-live="polite">ตะกร้า (0)</a>
+      </nav>
+    </div>
+
+    <!-- เมธอด: เมนูหลักแบบชิป (จัดหมวดหมู่) -->
+    <div class="wrap menu" role="navigation" aria-label="เมนูหลัก">
+      <a href="#">ของแต่งบ้าน</a><a href="catalog.html">สินค้า</a><a href="3D.html">3D</a>
+      <a href="#">ลดราคา</a><a href="#">สั่งทำ</a><a href="#">สำหรับคุณ</a>
+      <a href="#">ตัวอย่างสินค้า</a><a href="#">แกลลอรี่</a><a href="#">ติดต่อ</a>
+    </div>
+  </header>
+
+  <!-- ====================== Main ====================== -->
+  <main class="wrap">
+    <!-- ====================== Hero Swiper ====================== -->
+    <!-- เมธอด: สไลด์ฮีโร่ ใช้โครงสร้าง .swiper > .swiper-wrapper > .swiper-slide -->
+    <section class="hero-slider" aria-label="โปรโมชั่นและแบนเนอร์">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <!-- เมธอด: สไลด์แต่ละใบควรใส่ alt อธิบายภาพสั้นๆ -->
+          <div class="swiper-slide" style="background:#fffaf8">
+            <img src="image/banner/banner1.png" alt="แบนเนอร์ 1" style="width:100%; height:auto; display:block;">
+          </div>
+          <div class="swiper-slide" style="background:#fffaf8">
+            <img src="image/banner/banner2.png" alt="แบนเนอร์ 2" style="width:100%; height:auto; display:block;">
+          </div>
+          <div class="swiper-slide" style="background:#fffaf8">
+            <img src="image/banner/banner3.png" alt="แบนเนอร์ 3" style="width:100%; height:auto; display:block;">
+          </div>
         </div>
+        <!-- เมธอด: จุดบอกหน้าและปุ่มนำทางของ Swiper -->
+        <div class="swiper-pagination" aria-label="ตำแหน่งสไลด์"></div>
+        <div class="swiper-button-prev" aria-label="สไลด์ก่อนหน้า"></div>
+        <div class="swiper-button-next" aria-label="สไลด์ถัดไป"></div>
+      </div>
+    </section>
 
-        <!-- เมนูหลัก -->
-        <div class="wrap menu">
-            <a href="#">ของแต่งบ้าน</a><a href="#">ราคาพิเศษ</a><a href="#">3D</a>
-            <a href="#">ลดราคา</a><a href="#">สั่งทำ</a><a href="#">สำหรับคุณ</a>
-            <a href="#">ตัวอย่างสินค้า</a><a href="#">แกลลอรี่</a><a href="#">ติดต่อ</a>
+    <!-- ====================== หมวด: ของแต่งบ้าน ====================== -->
+    <div class="section">
+      <!-- เมธอด: หัวข้อส่วน + ลิงก์ดูทั้งหมด -->
+      <h2>ของแต่งบ้าน</h2><a href="#">ดูทั้งหมด</a>
+    </div>
+
+    <!-- เมธอด: กริดสินค้าแบบการ์ด (ลิงก์ไปหน้า product.html พร้อม query id) -->
+    <div class="grid">
+      <a class="card" href="product.html?id=S001">
+        <div class="thumb">
+          <img src="image/products/S001/S001-01.jpg" alt="S001" height="100%" width="100%">
         </div>
-    </header>
-
-    <main class="wrap">
-
-        <!-- Hero Swiper -->
-        <section class="hero-slider">
-            <div class="swiper">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide" style="background:#fffaf8">
-                        <img src="image/banner/banner1.png" alt="แบนเนอร์ 1" style="width:100%; height:auto;display:block;">
-                    </div>
-                    <div class="swiper-slide" style="background:#fffaf8">
-                        <img src="image/banner/banner2.png" alt="แบนเนอร์ 2" style="width:100%;height:auto;display:block;">
-                    </div>
-                    <div class="swiper-slide" style="background:#fffaf8">
-                        <img src="image/banner/banner3.png" alt="แบนเนอร์ 3" style="width:100%;height:auto;display:block;">
-                    </div>
-                </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-prev"></div>
-                <div class="swiper-button-next"></div>
-            </div>
-        </section>
-
-        <!-- Category strip -->
-        <div class="section"><h2>ของแต่งบ้าน</h2><a href="#">ดูทั้งหมด</a></div>
-        <div class="grid">
-            <a class="card" href="#"><div class="thumb"><div class="ph"></div></div><div class="body"><strong>ชั้นวางของ</strong><div class="meta">ไม้จริง มินิมอล</div></div></a>
-            <a class="card" href="#"><div class="thumb"><div class="ph"></div></div><div class="body"><strong>หิ้งพระ</strong><div class="meta">ไม้จริง อบอุ่น</div></div></a>
-            <a class="card" href="#"><div class="thumb"><div class="ph"></div></div><div class="body"><strong>ตู้ & ชั้นวาง</strong><div class="meta">ไม้จริง มูจิ</div></div></a>
-            <a class="card" href="#"><div class="thumb"><div class="ph"></div></div><div class="body"><strong>งานไม้</strong><div class="meta">ไม้จริง ชั้นวาง</div></div></a>
+        <div class="body">
+          <strong>ชั้นวางของไม้สน S001</strong>
+          <div class="meta">ไม้จริง มินิมอล</div>
         </div>
+      </a>
 
-        <!-- Products -->
-        <div class="section"><h2>แนะนำสำหรับคุณ</h2><a href="#">ดูทั้งหมด</a></div>
-        <div class="grid" id="productGrid">
-            <article class="card">
-                <a class="thumb" href="#"><div class="ph"></div></a>
-                <div class="body">
-                    <h3 class="name">โคมไฟโต๊ะทรงโดม</h3>
-                    <div class="meta">★ 4.8 · ขายแล้ว 1.2k</div>
-                    <div class="price"><strong>฿ 1,280</strong><del>฿ 1,590</del><span class="badge">-19%</span></div>
-                </div>
-                <button class="add" data-name="โคมไฟโต๊ะทรงโดม">หยิบลงตะกร้า</button>
-            </article>
-            <article class="card">
-                <a class="thumb" href="#"><div class="ph"></div></a>
-                <div class="body">
-                    <h3 class="name">แจกันเซรามิกพาสเทล</h3>
-                    <div class="meta">★ 4.7 · ขายแล้ว 860</div>
-                    <div class="price"><strong>฿ 690</strong></div>
-                </div>
-                <button class="add" data-name="แจกันเซรามิกพาสเทล">หยิบลงตะกร้า</button>
-            </article>
-            <article class="card">
-                <a class="thumb" href="#"><div class="ph"></div></a>
-                <div class="body">
-                    <h3 class="name">ชุดปลอกหมอนลินิน</h3>
-                    <div class="meta">★ 4.6 · ขายแล้ว 540</div>
-                    <div class="price"><strong>฿ 480</strong><del>฿ 520</del></div>
-                </div>
-                <button class="add" data-name="ชุดปลอกหมอนลินิน">หยิบลงตะกร้า</button>
-            </article>
-            <article class="card">
-                <a class="thumb" href="#"><div class="ph"></div></a>
-                <div class="body">
-                    <h3 class="name">ชั้นวางไม้สไตล์นอร์ดิก</h3>
-                    <div class="meta">★ 4.9 · ขายแล้ว 310</div>
-                    <div class="price"><strong>฿ 1,950</strong></div>
-                </div>
-                <button class="add" data-name="ชั้นวางไม้สไตล์นอร์ดิก">หยิบลงตะกร้า</button>
-            </article>
+      <a class="card" href="product.html?id=S002">
+        <div class="thumb">
+          <img src="image/products/S002/S002-01.jpg" alt="S002" height="100%" width="100%">
         </div>
-
-        <!-- Made to order -->
-        <div class="mto">
-            <p><strong>สั่งทำ (Made-to-Order)</strong> — เลือกวัสดุ/ขนาด/สี ให้เข้าบ้านคุณได้เลย ส่งร่างแบบก่อนผลิต</p>
-            <button class="btn">เริ่มสั่งทำ</button>
+        <div class="body">
+          <!-- เมธอด: แก้ชื่อรุ่นให้ตรงเป็น S002 -->
+          <strong>ชั้นวางของไม้สน S002</strong>
+          <div class="meta">ไม้จริง มินิมอล</div>
         </div>
+      </a>
 
-        <!-- Newsletter -->
-        <div class="news">
-            <div><strong>รับคูปอง 100.-</strong> เมื่อสมัครรับข่าวสารสไตล์ & โปรใหม่</div>
-            <form onsubmit="event.preventDefault(); toast('สมัครสำเร็จ ขอบคุณค่ะ!')">
-                <input type="email" placeholder="อีเมลของคุณ" required>
-                <button class="btn primary">สมัคร</button>
-            </form>
+      <a class="card" href="product.html?id=S001">
+        <div class="thumb">
+          <img src="image/products/S001/S001-01.jpg" alt="S001">
         </div>
-    </main>
+        <div class="body">
+          <strong>ชั้นวางของไม้สน S001</strong>
+          <div class="meta">ไม้จริง มินิมอล</div>
+        </div>
+      </a>
 
-    <footer>
-        <div class="wrap">© 2025 Gyver Home · งานออกแบบทำมือ / รับสั่งทำ · ติดต่อ: hello@example.com</div>
-    </footer>
+      <a class="card" href="product.html?id=S001">
+        <div class="thumb">
+          <img src="image/products/S001/S001-01.jpg" alt="S001">
+        </div>
+        <div class="body">
+          <strong>ชั้นวางของไม้สน S001</strong>
+          <div class="meta">ไม้จริง มินิมอล</div>
+        </div>
+      </a>
+    </div>
 
-    <div class="toast" id="toast"></div>
+    <!-- ====================== หมวด: แนะนำสำหรับคุณ ====================== -->
+    <div class="section">
+      <h2>แนะนำสำหรับคุณ</h2><a href="#">ดูทั้งหมด</a>
+    </div>
 
-    <!-- Swiper JS (CDN) -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- เมธอด: กริดสินค้าแบบบทความ (article) + ปุ่มหยิบลงตะกร้า (เดโม) -->
+    <div class="grid" id="productGrid">
+      <article class="card">
+        <a class="thumb" href="#">
+          <!-- เมธอด: .ph เป็น placeholder ใส่รูปเต็มบล็อก -->
+          <div class="ph">
+            <img src="image/ของแต่งบ้าน/S003.jpg" alt="S003" height="100%" width="100%">
+          </div>
+        </a>
+        <div class="body">
+          <h3 class="name">ชั้นแขวนผนัง มินิมอล</h3>
+          <div class="meta">★ 4.8 · ขายแล้ว 1.2k</div>
+          <div class="price">
+            <strong>฿ 1,280</strong><del>฿ 1,590</del><span class="badge">-19%</span>
+          </div>
+        </div>
+        <!-- เมธอด: ปุ่ม Add-to-cart ใช้ data-name ให้ JS อ่านชื่อสินค้า -->
+        <button class="add" data-name="โคมไฟโต๊ะทรงโดม">หยิบลงตะกร้า</button>
+      </article>
 
-    <!-- App JS -->
-    <script src="app.js"></script>
+      <article class="card">
+        <a class="thumb" href="#"><div class="ph"></div></a>
+        <div class="body">
+          <h3 class="name">แจกันเซรามิกพาสเทล</h3>
+          <div class="meta">★ 4.7 · ขายแล้ว 860</div>
+          <div class="price"><strong>฿ 690</strong></div>
+        </div>
+        <button class="add" data-name="แจกันเซรามิกพาสเทล">หยิบลงตะกร้า</button>
+      </article>
+
+      <article class="card">
+        <a class="thumb" href="#"><div class="ph"></div></a>
+        <div class="body">
+          <h3 class="name">ชุดปลอกหมอนลินิน</h3>
+          <div class="meta">★ 4.6 · ขายแล้ว 540</div>
+          <div class="price"><strong>฿ 480</strong><del>฿ 520</del></div>
+        </div>
+        <button class="add" data-name="ชุดปลอกหมอนลินิน">หยิบลงตะกร้า</button>
+      </article>
+
+      <article class="card">
+        <a class="thumb" href="#"><div class="ph"></div></a>
+        <div class="body">
+          <h3 class="name">ชั้นวางไม้สไตล์นอร์ดิก</h3>
+          <div class="meta">★ 4.9 · ขายแล้ว 310</div>
+          <div class="price"><strong>฿ 1,950</strong></div>
+        </div>
+        <button class="add" data-name="ชั้นวางไม้สไตล์นอร์ดิก">หยิบลงตะกร้า</button>
+      </article>
+    </div>
+
+    <!-- ====================== แถบ Made-to-Order ====================== -->
+    <!-- เมธอด: ข้อความกระตุ้นการสั่งทำ พร้อมปุ่ม CTA -->
+    <div class="mto">
+      <p><strong>สั่งทำ (Made-to-Order)</strong> — เลือกวัสดุ/ขนาด/สี ให้เข้าบ้านคุณได้เลย ส่งร่างแบบก่อนผลิต</p>
+      <button class="btn">เริ่มสั่งทำ</button>
+    </div>
+
+    <!-- ====================== Newsletter ====================== -->
+    <!-- เมธอด: ฟอร์มสมัครข่าวสาร (เดโม) onsubmit เรียก toast ผ่าน JS -->
+    <div class="news">
+      <div><strong>รับคูปอง 100.-</strong> เมื่อสมัครรับข่าวสารสไตล์ & โปรใหม่</div>
+      <form onsubmit="event.preventDefault(); toast('สมัครสำเร็จ ขอบคุณค่ะ!')">
+        <input type="email" placeholder="อีเมลของคุณ" required aria-label="อีเมลสำหรับสมัครข่าวสาร">
+        <button class="btn primary">สมัคร</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- ====================== Footer ====================== -->
+  <!-- เมธอด: ส่วนท้ายให้ข้อมูลลิขสิทธิ์และช่องทางติดต่อ -->
+  <footer>
+    <div class="wrap">© 2025 Gyver Home · งานออกแบบทำมือ / รับสั่งทำ · ติดต่อ: hello@example.com</div>
+  </footer>
+
+  <!-- ====================== Toast element ====================== -->
+  <!-- เมธอด: กล่องแสดงข้อความแจ้งเตือนแบบลอย (ให้ JS ควบคุม class .show) -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- ====================== Scripts ====================== -->
+  <!-- เมธอด: โหลดสคริปต์ Swiper (ต้องมาก่อนสคริปต์ที่ init) -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- เมธอด: สคริปต์แอปหลัก
+       - ถ้าไฟล์ JS แยกเป็นโมดูล (main.js ตามที่คุยก่อนหน้า) ให้ใช้ type="module"
+       - ถ้ายังรวมไว้ใน Head.js เดียว ใช้แบบปกติ และให้ Head.js ทำ:
+         1) init Toast  2) init Add-to-Cart  3) render Hot Chips  4) init Swiper -->
+  <!-- ตัวอย่างแบบโมดูล:
+  <script type="module" src="/js/main.js"></script>
+  -->
+  <script src="JS/Head.js"></script>
 </body>
 </html>

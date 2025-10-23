@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Gyver Home — Product</title>
+
+  <!-- App CSS (ของคุณเอง) -->
+  <link rel="stylesheet" href="CSS/index.css">
+  <link rel="stylesheet" href="CSS/product.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="wrap header-in">
+    <a href="index.html" class="logo">S GYVER</a>
+
+    <form class="search" onsubmit="event.preventDefault();">
+      <input type="search" placeholder="ค้นหาสินค้า/สไตล์ เช่น โคมไฟสแกนดิเนเวีย">
+      <button type="submit">ค้นหา</button>
+    </form>
+    <div class="hot-search hot-inline"><span class="chips" id="hotChips"></span></div>
+
+    <nav class="quick">
+      <a href="#">เข้าสู่ระบบ</a>
+      <a href="#">รายการโปรด</a>
+      <a href="#" class="cart">ตะกร้า (0)</a>
+    </nav>
+  </div>
+
+  <div class="wrap menu">
+    <a href="catalog.html">ของแต่งบ้าน</a><a href="#">ราคาพิเศษ</a><a href="#">3D</a>
+    <a href="#">ลดราคา</a><a href="#">สั่งทำ</a><a href="#">สำหรับคุณ</a>
+    <a href="#">ตัวอย่างสินค้า</a><a href="#">แกลลอรี่</a><a href="#">ติดต่อ</a>
+  </div>
+</header>
+
+<main class="wrap page">
+  <!-- ซ้าย: แกลเลอรี -->
+  <section class="gallery">
+    <div class="preview">
+      <!-- ไม่ใส่ src ไว้ก่อน ให้ JS ใส่ทีหลัง -->
+      <img id="mainImg" alt="">
+    </div>
+    <div class="thumbs" id="thumbs"><!-- JS ใส่ให้ --></div>
+
+    <div class="share">
+      แชร์:
+      <button class="icon" data-share="fb" aria-label="แชร์ Facebook">f</button>
+      <button class="icon" data-share="x" aria-label="แชร์ X">x</button>
+      <button class="icon" data-share="line" aria-label="แชร์ LINE">L</button>
+      <button class="icon" id="copyLink">คัดลอกลิงก์</button>
+    </div>
+  </section>
+
+  <!-- ขวา: รายละเอียด/ราคา/ตัวเลือก -->
+  <section class="info">
+    <h1 class="title" id="pTitle">ชื่อสินค้า</h1>
+
+    <div class="rating">
+      <span class="stars" aria-label="เรตติ้ง">★★★★☆</span>
+      <span class="muted" id="pRating">4.8</span>
+      <span class="sep">|</span>
+      <a href="#" class="muted" id="pReviews">รีวิว 0</a>
+      <span class="sep">|</span>
+      <span class="muted" id="pSold">ขายแล้ว 0</span>
+    </div>
+
+    <!-- ราคา -->
+    <div class="priceBox">
+      <span id="priceMain" class="main"></span>
+      <span id="priceStrike" class="strike"></span>
+      <span id="badgeOff" class="badge"></span>
+    </div>
+
+    <!-- ตัวเลือกขนาด (สร้างอัตโนมัติจาก variants.json) -->
+    <div id="variantBox" class="variant-group" style="display:none;">
+      <h4>ตัวเลือกสินค้า</h4>
+      <div id="variantOptions" class="chips"></div>
+    </div>
+
+    <div class="metaRow">
+      <div class="label">การจัดส่ง:</div>
+      <div>
+        <strong>จัดส่งเร็ว</strong> ถึงบ้านคุณภายใน 2–4 วันทำการ
+        <div class="muted small">ค่าจัดส่ง เริ่มต้น 30–45 บาท</div>
+      </div>
+    </div>
+
+    <div class="metaRow">
+      <div class="label">จำนวน:</div>
+      <div class="qty">
+        <button class="qbtn" data-act="minus">−</button>
+        <input id="qty" type="number" min="1" value="1" inputmode="numeric">
+        <button class="qbtn" data-act="plus">+</button>
+        <span class="muted small" id="pStockHint"></span>
+      </div>
+    </div>
+
+    <div class="ctaRow">
+      <button class="btn ghost" id="chat">แชตกับร้าน</button>
+      <button class="btn" id="addCart">หยิบลงตะกร้า</button>
+      <button class="btn primary" id="buyNow">ซื้อสินค้า</button>
+    </div>
+
+    <div class="trust">
+      <div class="item"><strong>คืนสินค้าได้</strong><span class="muted small">ภายใน 7 วัน (ตามเงื่อนไข)</span></div>
+      <div class="item"><strong>รับประกันงานไม้</strong><span class="muted small">30 วัน</span></div>
+      <div class="item"><strong>โค้ดส่วนลด</strong><span class="muted small">เช็คหน้าโปรโมชัน</span></div>
+    </div>
+  </section>
+</main>
+
+<section class="wrap columns">
+  <aside class="spec">
+    <h2>ข้อมูลสินค้า</h2>
+    <dl class="specTable">
+      <div><dt>หมวดหมู่</dt><dd id="pCats">—</dd></div>
+      <div><dt>คลัง</dt><dd id="pStock">—</dd></div>
+      <div><dt>วัสดุ</dt><dd>ไม้สนอบแห้ง เคลือบแลคเกอร์</dd></div>
+      <div><dt>แหล่งผลิต</dt><dd>จันทบุรี</dd></div>
+    </dl>
+  </aside>
+
+  <article class="desc">
+    <h2>รายละเอียดสินค้า</h2>
+    <div class="content" id="desc">
+      กำลังโหลดรายละเอียดสินค้า…
+    </div>
+  </article>
+</section>
+
+<footer class="footer">
+  <div class="wrap">© 2025 Gyver Home</div>
+</footer>
+
+<script src="JS/product.js"></script>
+</body>
+</html>
